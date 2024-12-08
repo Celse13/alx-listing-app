@@ -1,37 +1,45 @@
-import Image from 'next/image';
-import { CardProps } from '../../interfaces';
+import React from 'react';
+import { ButtonProps } from '@/interfaces';
 
-interface ButtonProps {
-  children: ;
-  onClick?: () => void;
-  variant?: 'primary' | 'secondary' | 'outline';
-  className?: string;
-}
-
-const Button = ({ 
+export const Button: React.FC<ButtonProps> = ({
   children,
+  variant = 'primary',
+  size = 'medium',
+  fullWidth = false,
+  disabled = false,
   onClick,
-  variant,
-  className
-}: ButtonProps) => {
+  type = 'button',
+  className = '',
+}): ButtonProps => {
+  const baseStyles = 'rounded-lg font-semibold transition-colors duration-200';
+  
+  const variants = {
+    primary: 'bg-rose-500 text-white hover:bg-rose-600',
+    secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
+    outline: 'border-2 border-rose-500 text-rose-500 hover:bg-rose-50'
+  };
+
+  const sizes = {
+    small: 'px-3 py-1.5 text-sm',
+    medium: 'px-4 py-2 text-base',
+    large: 'px-6 py-3 text-lg'
+  };
+
   return (
-    <div className="rounded-xl overflow-hidden shadow-lg bg-white">
-      <div className="relative h-48 w-full">
-        <Image
-          src={imageUrl}
-          alt={title}
-          fill
-          className="object-cover"
-        />
-      </div>
-      <div className="p-4">
-        <h3 className="font-bold text-lg">{title}</h3>
-        <p className="text-gray-600 text-sm">{location}</p>
-        <p className="text-gray-500 mt-2">{description}</p>
-        <p className="text-lg font-bold mt-2">${price} / night</p>
-      </div>
-    </div>
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={`
+        ${baseStyles}
+        ${variants[variant]}
+        ${sizes[size]}
+        ${fullWidth ? 'w-full' : ''}
+        ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
+        ${className}
+      `}
+    >
+      {children}
+    </button>
   );
 };
-
-export default Card;

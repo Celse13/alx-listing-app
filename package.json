@@ -1,0 +1,8 @@
+{
+  "name": "alx-listing-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Celse13/alx-listing-app.git",
+  "author": "celse13 <rugiracelse13@gmail.com>",
+  "license": "MIT"
+}
